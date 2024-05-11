@@ -19,7 +19,7 @@ public class Principal {
     private DatasConvert convert = new DatasConvert();
 
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
-    ;
+
     private final String API_KEY = "&apikey=56f41d3d";
 
     public void exibeMenu() throws InterruptedException {
@@ -44,6 +44,7 @@ public class Principal {
 //                System.out.println(episodesSeasons.get(j).titulo());
 //            }
 //        }
+
         temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
         List<DatasEpisode> datasEpisodesList = temporadas.stream()
@@ -63,33 +64,33 @@ public class Principal {
 
         episodeList.forEach(System.out::println);
 
-//        System.out.println("Digite o titulo de algum episódio: ");
-//
-//        var trechoTitulo = leitura.nextLine();
-//        Optional<Episode> searchedEpisode = episodeList.stream()
-//                .filter(e -> e.getTitle().contains(trechoTitulo.toUpperCase()))
-//                .findFirst();
-//        if(searchedEpisode.isPresent()) {
-//            System.out.println("Episódio encontrado!");
-//            System.out.println("Temporada: " + searchedEpisode.get().getSeason());
-//        } else {
-//            System.out.println("Episódio não encotrado!");
-//        }
+        System.out.println("Digite o titulo de algum episódio: ");
 
-//        System.out.println("A partir de que ano você deseja ver os episódios? ");
-//        var ano = leitura.nextInt();
-//        leitura.nextLine();
-//
-//        LocalDate searchDate = LocalDate.of(ano, 1, 1);
-//
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//
-//        episodeList.stream()
-//                .filter(e -> e.getReleaseDate() != null && e.getReleaseDate().isAfter(searchDate))
-//                .forEach(e -> System.out.println("Temporada: " + e.getSeason() +
-//                        " Episódio: " + e.getTitle() +
-//                        " Data de lançamento: " + e.getReleaseDate().format(formatter)
-//                ));
+        var trechoTitulo = leitura.nextLine();
+        Optional<Episode> searchedEpisode = episodeList.stream()
+                .filter(e -> e.getTitle().contains(trechoTitulo.toUpperCase()))
+                .findFirst();
+        if(searchedEpisode.isPresent()) {
+            System.out.println("Episódio encontrado!");
+            System.out.println("Temporada: " + searchedEpisode.get().getSeason());
+        } else {
+            System.out.println("Episódio não encotrado!");
+        }
+
+        System.out.println("A partir de que ano você deseja ver os episódios? ");
+        var ano = leitura.nextInt();
+        leitura.nextLine();
+
+        LocalDate searchDate = LocalDate.of(ano, 1, 1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        episodeList.stream()
+                .filter(e -> e.getReleaseDate() != null && e.getReleaseDate().isAfter(searchDate))
+                .forEach(e -> System.out.println("Temporada: " + e.getSeason() +
+                        " Episódio: " + e.getTitle() +
+                        " Data de lançamento: " + e.getReleaseDate().format(formatter)
+                ));
 
         Map<Integer, Double> ratingBySeason = episodeList.stream()
                 .filter(e -> e.getRating() > 0.0)
